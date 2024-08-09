@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:linkedin_slicing/login.dart';
+import 'package:linkedin_slicing/widgets/button_login.dart';
+import 'package:linkedin_slicing/widgets/colors.dart';
+import 'package:linkedin_slicing/widgets/continue_button.dart';
+import 'package:linkedin_slicing/widgets/navigate_button.dart';
+import 'package:linkedin_slicing/widgets/or_with_lines.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -39,50 +44,34 @@ class _RegisterState extends State<Register> {
                   fontSize: 30,
                 ),
               ),
-              TextButton(
+              NavigateButton(
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => const Login()));
                   },
-                  style: ButtonStyle(
-                    padding:
-                        WidgetStateProperty.all<EdgeInsets>(EdgeInsets.zero),
+                  firstText: "atau ",
+                  secondText: "Login",
+                  firstTextColor: secondaryColor,
+                  secondTextColor: primaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14),
+              SizedBox(
+                height: 12,
+              ),
+              TextField(
+                keyboardType: TextInputType.emailAddress,
+                cursorColor: Colors.black,
+                decoration: InputDecoration(
+                  labelText: "Email atau Telepon*",
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 152, 152, 152)),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color.fromARGB(255, 140, 140, 140)),
                   ),
-                  child: Row(
-                    children: [
-                      Text(
-                        "atau ",
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 135, 135, 135),
-                          fontSize: 14,
-                        ),
-                      ),
-                      Text(
-                        "Login",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 10, 102, 194),
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  )),
-              Container(
-                margin: EdgeInsets.only(top: 12),
-                child: TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  cursorColor: Colors.black,
-                  decoration: InputDecoration(
-                    labelText: "Email atau Telepon*",
-                    labelStyle:
-                        TextStyle(color: Color.fromARGB(255, 152, 152, 152)),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 140, 140, 140)),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Color.fromARGB(255, 102, 102, 102), width: 2),
-                    ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color.fromARGB(255, 102, 102, 102), width: 2),
                   ),
                 ),
               ),
@@ -177,89 +166,51 @@ class _RegisterState extends State<Register> {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 12),
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 10, 102, 194),
-                      padding: EdgeInsets.all(8),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _showPasswordField = true;
-                      });
-                    },
-                    child: Text(
-                      "Setuju & Bergabung",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    )),
+              SizedBox(
+                height: 12,
+              ),
+              ContinueButton(
+                textButton: "Setuju & Bergabung",
+                backgroundColor: primaryColor,
+                padding: 8,
+                fontSize: 20,
+                textColor: Colors.white,
+                onPressed: () {
+                  setState(() {
+                    _showPasswordField = true;
+                  });
+                },
               ),
               if (!_showPasswordField)
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 16),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Divider(
-                          thickness: 1,
-                          color: Color.fromARGB(255, 240, 240, 240),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Text(
-                          "atau",
-                          style: TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Divider(
-                          thickness: 1,
-                          color: Color.fromARGB(255, 240, 240, 240),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                OrWithLines(
+                    fontWeight: FontWeight.w500,
+                    marginVertical: 16,
+                    thicknessLine: 1,
+                    lineColor: lineColor,
+                    textOr: "atau",
+                    fontSize: 14,
+                    textPadding: 20),
               if (!_showPasswordField)
-                OutlinedButton.icon(
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: Color.fromARGB(255, 169, 164, 164),
-                    padding: EdgeInsets.all(8),
-                  ),
-                  onPressed: () {},
-                  label: Text(
-                    "Login dengan Google",
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 81, 81, 81),
-                      fontSize: 20,
-                    ),
-                  ),
-                  icon: Image.asset('images/google.png',
-                      height: 26, fit: BoxFit.cover),
-                ),
+                ButtonLogin(
+                    padding: 8,
+                    foregroundColor: foregroundColorButtonLogin,
+                    fontSize: 20,
+                    textButton: "Login dengan Google",
+                    images: "images/google.png",
+                    height: 26,
+                    textButtonColor: textColorButtonLogin),
+              SizedBox(
+                height: 8,
+              ),
               if (!_showPasswordField)
-                Container(
-                  margin: EdgeInsets.only(top: 8),
-                  child: OutlinedButton.icon(
-                    style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.all(8),
-                      foregroundColor: Color.fromARGB(255, 169, 164, 164),
-                    ),
-                    onPressed: () {},
-                    label: Text(
-                      "Login dengan Facebook",
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 81, 81, 81),
-                        fontSize: 20,
-                      ),
-                    ),
-                    icon: Image.asset('images/facebook.png',
-                        height: 19, fit: BoxFit.cover),
-                  ),
-                ),
+                ButtonLogin(
+                    padding: 8,
+                    foregroundColor: foregroundColorButtonLogin,
+                    fontSize: 20,
+                    textButton: "Login dengan Facebook",
+                    images: "images/facebook.png",
+                    height: 19,
+                    textButtonColor: textColorButtonLogin),
             ],
           ),
         ),
