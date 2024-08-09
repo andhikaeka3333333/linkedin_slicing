@@ -3,6 +3,7 @@ import 'package:linkedin_slicing/login.dart';
 import 'package:linkedin_slicing/widgets/button_login.dart';
 import 'package:linkedin_slicing/widgets/colors.dart';
 import 'package:linkedin_slicing/widgets/continue_button.dart';
+import 'package:linkedin_slicing/widgets/custom_input.dart';
 import 'package:linkedin_slicing/widgets/navigate_button.dart';
 import 'package:linkedin_slicing/widgets/or_with_lines.dart';
 
@@ -58,55 +59,27 @@ class _RegisterState extends State<Register> {
               SizedBox(
                 height: 12,
               ),
-              TextField(
-                keyboardType: TextInputType.emailAddress,
-                cursorColor: Colors.black,
-                decoration: InputDecoration(
-                  labelText: "Email atau Telepon*",
-                  labelStyle:
-                      TextStyle(color: Color.fromARGB(255, 152, 152, 152)),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 140, 140, 140)),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Color.fromARGB(255, 102, 102, 102), width: 2),
-                  ),
-                ),
-              ),
+              CustomInput(
+                  labelText: "Email atau Telepon",
+                  keyboardType: TextInputType.emailAddress,
+                  obscureText: false,
+                  isPassword: false,
+                  cursorColor: Colors.black,
+                  labelColor: labelColor,
+                  enabledBorderColor: enabledBorderColor,
+                  focusedBorderColor: focusedBorderColor),
               if (_showPasswordField)
                 Container(
                   margin: EdgeInsets.only(top: 24),
-                  child: TextField(
-                    obscureText: _isObscure,
-                    cursorColor: Colors.black,
-                    decoration: InputDecoration(
+                  child: CustomInput(
                       labelText: "Kata Sandi",
-                      labelStyle:
-                          TextStyle(color: Color.fromARGB(255, 152, 152, 152)),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 140, 140, 140)),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 102, 102, 102),
-                          width: 2,
-                        ),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isObscure = !_isObscure;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
+                      keyboardType: TextInputType.text,
+                      obscureText: true,
+                      isPassword: true,
+                      cursorColor: Colors.black,
+                      labelColor: labelColor,
+                      enabledBorderColor: enabledBorderColor,
+                      focusedBorderColor: focusedBorderColor),
                 ),
               Container(
                 margin: EdgeInsets.only(top: 40),
